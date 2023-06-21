@@ -6,9 +6,8 @@ using WebApi.Domain.Entities;
 
 namespace WebApi.Domain
 {
-    public class User : Entity
+    public class User : Person
     {
-        public string Name { get; set; }
-        public IList<Book> BooksId  { get; set; }
+        public IList<Book> BorrowedBooks  { get; set; }
     }
 }

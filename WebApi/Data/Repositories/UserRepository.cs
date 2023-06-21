@@ -1,4 +1,4 @@
-/* using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,47 +10,35 @@ namespace WebApi.Data.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly DataContext context;
-
-        public UserRepository(DataContext context)
+        private readonly DataContext _context;
+        public UserRepository()
         {
-            this.context = context;
+            _context = new DataContext();
         }
-
-        public bool Delete(int entityId)
+        public IList<User> GetAll()
         {
-            var user = context.Users.FirstOrDefault(x => x.Id == entityId);
-
-            if (user == null)
-                return false;
-            else
-            {
-                context.Users.Remove(user);
-                return true;
-            }
+            return _context.Users.ToList();
         }
-
-        public async Task<IList<User>> GetAllAsync()
+        public User GetById(int entityId)
         {
-            return await context.Users.ToListAsync();
+            return _context.Users
+                .FirstOrDefault(x => x.Id == entityId);
         }
-
-        public async Task<User> GetByIdAsync(int entityId)
-        {
-            return await context.Users.FirstOrDefaultAsync(x => x.Id == entityId);
-        }
-
         public void Save(User entity)
         {
-            context.Add(entity);
-            context.SaveChanges();
+            _context.Add(entity);
+            _context.SaveChanges();
         }
-
         public void Update(User entity)
         {
-            context.Users.Update(entity);
-            context.SaveChanges();
+            _context.Users.Update(entity);
+            _context.SaveChanges();
+        }
+        public void Delete(int entityId)
+        {
+            var u = GetById(entityId);
+            _context.Users.Remove(u);
+            _context.SaveChanges();
         }
     }
 }
- */

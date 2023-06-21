@@ -6,11 +6,8 @@ using WebApi.Domain.Entities;
 
 namespace WebApi.Domain
 {
-    public class Author : Entity
+    public class Author : Person
     {
-        public string Name { get; set; }
-        public int Age { get; set; }
-        public string Cpf { get; set; }
-        public IList<Book> Books { get; set; }
+        
     }
 }

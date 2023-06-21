@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "hZvLUP1neL74e17mGIuEv7CtHVbfu3hEWQr4RjFHW5EYtHy/RKHd1kMv69skEo+hJYdFdbaJJERJEhJcJWAiyA==",
+  "dgSpecHash": "RL6tb3KgALJxKCQFhBkyE8a7yQY/fzUGzTjQfkx/alKTrcSb26x1nkuwTe4kIIWtXu+SOG3LELSnL/RSWsEzTg==",
   "success": true,
   "projectFilePath": "C:\\Users\\junior\\Documents\\code\\library_as\\WebApi\\library_as.csproj",
   "expectedPackageFiles": [
@@ -17,6 +17,7 @@
     "C:\\Users\\junior\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\7.0.7\\microsoft.entityframeworkcore.relational.7.0.7.nupkg.sha512",
     "C:\\Users\\junior\\.nuget\\packages\\microsoft.entityframeworkcore.sqlite\\7.0.7\\microsoft.entityframeworkcore.sqlite.7.0.7.nupkg.sha512",
     "C:\\Users\\junior\\.nuget\\packages\\microsoft.entityframeworkcore.sqlite.core\\7.0.7\\microsoft.entityframeworkcore.sqlite.core.7.0.7.nupkg.sha512",
+    "C:\\Users\\junior\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\7.0.7\\microsoft.entityframeworkcore.tools.7.0.7.nupkg.sha512",
     "C:\\Users\\junior\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\7.0.0\\microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\junior\\.nuget\\packages\\microsoft.extensions.caching.memory\\7.0.0\\microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",
     "C:\\Users\\junior\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\7.0.0\\microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",

@@ -1,4 +1,4 @@
-/* using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,41 +10,35 @@ namespace WebApi.Data.Repositories
 {
     public class BookRepository : IBookRepository
     {
-        private readonly DataContext context;
-        public BookRepository(DataContext context)
+        private readonly DataContext _context;
+        public BookRepository()
         {
-            this.context = context;
+            _context = new DataContext();
         }
-        public bool Delete(int entityId)
+        public IList<Book> GetAll()
         {
-            var book = context.Books.FirstOrDefault(x => x.Id == entityId);
-
-            if (book == null)
-                return false;
-            else
-            {
-                context.Books.Remove(book);
-                return true;
-            }
+            return _context.Books.ToList();
         }
-        public async Task<IList<Book>> GetAllAsync()
+        public Book GetById(int entityId)
         {
-            return await context.Books.ToListAsync();
-        }
-        public async Task<Book> GetByIdAsync(int entityId)
-        {
-            return await context.Books
-                .FirstOrDefaultAsync(x => x.Id == entityId);
+            return _context.Books
+                .FirstOrDefault(x => x.Id == entityId);
         }
         public void Save(Book entity)
         {
-            context.Add(entity);
-            context.SaveChanges();
+            _context.Add(entity);
+            _context.SaveChanges();
         }
         public void Update(Book entity)
         {
-            context.Books.Update(entity);
-            context.SaveChanges();
+            _context.Books.Update(entity);
+            _context.SaveChanges();
+        }
+        public void Delete(int entityId)
+        {
+            var b = GetById(entityId);
+            _context.Books.Remove(b);
+            _context.SaveChanges();
         }
     }
-} */
+}

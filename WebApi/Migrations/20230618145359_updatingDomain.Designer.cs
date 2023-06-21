@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApi.Data;
 
@@ -10,12 +11,29 @@ using WebApi.Data;
 namespace library_as.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230618145359_updatingDomain")]
+    partial class updatingDomain
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.7");
+
+            modelBuilder.Entity("AuthorBook", b =>
+                {
+                    b.Property<int>("AuthorsId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("BooksId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("AuthorsId", "BooksId");
+
+                    b.HasIndex("BooksId");
+
+                    b.ToTable("AuthorBook");
+                });
 
             modelBuilder.Entity("WebApi.Domain.Author", b =>
                 {
@@ -26,9 +44,6 @@ namespace library_as.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("BookId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Cpf")
                         .HasColumnType("TEXT");
 
@@ -36,8 +51,6 @@ namespace library_as.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BookId");
 
                     b.ToTable("Authors");
                 });
@@ -90,11 +103,19 @@ namespace library_as.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("WebApi.Domain.Author", b =>
+            modelBuilder.Entity("AuthorBook", b =>
                 {
+                    b.HasOne("WebApi.Domain.Author", null)
+                        .WithMany()
+                        .HasForeignKey("AuthorsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("WebApi.Domain.Book", null)
-                        .WithMany("Authors")
-                        .HasForeignKey("BookId");
+                        .WithMany()
+                        .HasForeignKey("BooksId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WebApi.Domain.Book", b =>
@@ -102,11 +123,6 @@ namespace library_as.Migrations
                     b.HasOne("WebApi.Domain.User", null)
                         .WithMany("BorrowedBooks")
                         .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("WebApi.Domain.Book", b =>
-                {
-                    b.Navigation("Authors");
                 });
 
             modelBuilder.Entity("WebApi.Domain.User", b =>

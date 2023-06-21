@@ -1,7 +1,8 @@
-/* using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Data.Repositories;
 using WebApi.Domain;
@@ -13,64 +14,80 @@ namespace WebApi.Controllers
     [Route("api/[controller]")]
     public class UsersController : ControllerBase
     {
-        private readonly IUserRepository repository;
+        private readonly IUserRepository _repository;
+        private readonly IMapper _mapper;
 
-        public UsersController()
+        public UsersController(IMapper mapper)
         {
-            this.repository = new UserRepository();
+            this._repository = new UserRepository();
+            this._mapper = mapper;
         }
 
         [HttpGet]
-        public IEnumerable<User> Get()
+        public IActionResult GetAll()
         {
-            return repository.GetAll();
+            var user = _mapper.Map<IList<User>>(_repository.GetAll());
+            return HttpMessageOk(user);
         }
 
-        [HttpGet("{id}")]
-        public User Get(int id)
+        [HttpGet("{id:int}")]
+        public IActionResult GetById(int id)
         {
-            return repository.GetById(id);
+            var user = _mapper.Map<User>(_repository.GetById(id));
+            return HttpMessageOk(user);
         }
 
         [HttpPost]
         public IActionResult Post([FromBody] User item)
         {
-            repository.Save(item);
-            return Ok(
-                new
-                {
-                    statusCode = 200,
-                    message = "Cadastrado com sucesso",
-                    item
-                }
-            );
+            if (!ModelState.IsValid) return HttpMessageError("Dados incorretos");
+
+            var user = _mapper.Map<User>(item);
+            _repository.Save(user);
+
+            return HttpMessageOk(_mapper.Map<User>(item));
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            repository.Delete(id);
-            return Ok(
-                new 
-                { 
-                    statusCode = 200, 
-                    message = "Usuário excluído com sucesso" 
-                }
-            );
+            var user =  _repository.GetById(id);
+
+            if (user == null) 
+                return NotFound();
+            else 
+                _repository.Delete(id);
+                return HttpMessageOk("Usuário excluído com sucesso!");
         }
 
         [HttpPut]
         public IActionResult Put([FromBody] User item)
         {
-            repository.Update(item);
-            return Ok(
-                new
+            if (!ModelState.IsValid) return HttpMessageError("Dados incorretos");
+
+            var user = _mapper.Map<User>(item);
+            _repository.Update(user);
+
+            return HttpMessageOk(_mapper.Map<User>(item));
+        }
+
+        private IActionResult HttpMessageOk(dynamic data = null)
+        {
+            if(data == null)
+                return NoContent();
+            else
+                return Ok(new
                 {
-                    statusCode = 200,
-                    message = item.Name + " atualizado com sucesso",
-                    item
-                }
-            );
+                    data
+                });
+        }
+
+        private IActionResult HttpMessageError(string message = "")
+        {
+            return BadRequest(new
+            {
+                message
+            });
         }
     }
-} */
+}

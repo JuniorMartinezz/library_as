@@ -15,6 +15,7 @@ namespace WebApi.Data.Repositories
         {
             _context = new DataContext();
         }
+
         public IList<Author> GetAll()
         {
             return _context.Authors.ToList();

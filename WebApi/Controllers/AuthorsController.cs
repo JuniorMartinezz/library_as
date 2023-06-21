@@ -21,8 +21,8 @@ namespace WebApi.Controllers
 
         public AuthorsController(IMapper mapper)
         {
-            _repository = new AuthorRepository();
-            _mapper = mapper;
+            this._repository = new AuthorRepository();
+            this._mapper = mapper;
         }
 
         [HttpGet]
