@@ -41,3 +41,7 @@ Com a pasta do projeto aberta, você deverá rodar alguns comandos para instalar
 - `dotnet add package Swashbuckle.AspNetCore.Swagger --version 6.5.0`: Swagger
 - `dotnet add package Swashbuckle.AspNetCore.SwaggerUI --version 6.5.0`: SwaggerUI
 - `dotnet add package Swashbuckle.AspNetCore.SwaggerGen --version 6.5.0`: SwaggerGen
+
+  ## Funcionamento
+  Após efetuar a instalação dos pacotes, você deverá executar o comando -`dotnet ef migrations add "InsiraONomeDeUmaMigration ex: First` para criar uma migration e, para aplicar a alteração e gerar o banco de dados, você deverá rodar o comando -`dotnet ef database update`.
+  Tendo os comandos sido executados, basta apenas rodar o comando -`dotnet run`, e a aplicação está pronta para ser utilizada!
