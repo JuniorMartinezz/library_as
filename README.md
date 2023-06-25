@@ -26,3 +26,18 @@ Como citado anteriormente, essa API fornece funcionalidades de manipulação das
   
 ![image](https://github.com/JuniorMartinezz/library_as/assets/70040865/839871b1-0d06-43ae-b412-a30c72af0d80)
 
+## Instalação
+Antes de tudo, você deve se certificar de instalar a versão mais estável do dotnet (https://dotnet.microsoft.com/pt-br/download/dotnet).
+
+Após efetuar o download do projeto e instalar o dotnet, abra o VS code(ou seu editor de preferência) e vá em "Arquivo" e "Abrir Arquivo" para que você possa selecionar a pasta do projeto.
+Com a pasta do projeto aberta, você deverá rodar alguns comandos para instalar as funcionalidades necessárias:
+
+- `dotnet add package Microsoft.EntityFrameworkCore.SqlServer`: SQLite
+- `dotnet tool install --global dotnet-ef`: Entity Framework
+- `dotnet add package Microsoft.EntityFrameworkCore.Design`: Ef Desing
+- `dotnet add package Microsoft.EntityFrameworkCore.Tools --version 7.0.7` : Ef Tools
+- `dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection --version 12.0.1`: Automapper
+- `dotnet add package Microsoft.AspNetCore.OpenApi --version 7.0.7`: Open Api
+- `dotnet add package Swashbuckle.AspNetCore.Swagger --version 6.5.0`: Swagger
+- `dotnet add package Swashbuckle.AspNetCore.SwaggerUI --version 6.5.0`: SwaggerUI
+- `dotnet add package Swashbuckle.AspNetCore.SwaggerGen --version 6.5.0`: SwaggerGen
