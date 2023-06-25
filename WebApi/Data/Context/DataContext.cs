@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using WebApi.Data.Types;
 using WebApi.Domain;
 
 namespace WebApi.Data
@@ -23,5 +24,9 @@ namespace WebApi.Data
         public DbSet<Book> Books { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Borrowing> Borrowings { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new BookMap());
+        }
     }
 }
