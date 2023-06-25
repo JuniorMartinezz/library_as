@@ -4,3 +4,5 @@
 
 ![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
 
+## Descrição do projeto
+API RESTful utilizando ASP.NET Core Web API para um sistema de gerenciamento de biblioteca. A API fornece funcionalidades para manipular Livros, Autores e Usuários de uma biblioteca. Utiliza dos conceitos de Entity Framework, DTOs, View Models, repositórios e camada de domínio.
