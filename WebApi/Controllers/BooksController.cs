@@ -40,7 +40,8 @@ namespace WebApi.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Book item)
         {
-            if (!ModelState.IsValid) return HttpMessageError("Dados incorretos");
+            if (!ModelState.IsValid)
+            return HttpMessageError("Dados incorretos");
 
             var book = _mapper.Map<Book>(item);
             _repository.Save(book);
@@ -51,19 +52,20 @@ namespace WebApi.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var book =  _repository.GetById(id);
+            var book = _repository.GetById(id);
 
-            if (book == null) 
+            if (book == null)
                 return NotFound();
-            else 
+            else
                 _repository.Delete(id);
-                return HttpMessageOk("Livro excluído com sucesso!");
+            return HttpMessageOk("Livro excluído com sucesso!");
         }
 
         [HttpPut]
         public IActionResult Put([FromBody] Book item)
         {
-            if (!ModelState.IsValid) return HttpMessageError("Dados incorretos");
+            if (!ModelState.IsValid)
+                return HttpMessageError("Dados incorretos");
 
             var book = _mapper.Map<Book>(item);
             _repository.Update(book);
@@ -73,21 +75,15 @@ namespace WebApi.Controllers
 
         private IActionResult HttpMessageOk(dynamic data = null)
         {
-            if(data == null)
+            if (data == null)
                 return NoContent();
             else
-                return Ok(new
-                {
-                    data
-                });
+                return Ok(new { data });
         }
 
         private IActionResult HttpMessageError(string message = "")
         {
-            return BadRequest(new
-            {
-                message
-            });
+            return BadRequest(new { message });
         }
     }
 }

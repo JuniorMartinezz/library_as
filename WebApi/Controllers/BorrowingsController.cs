@@ -12,63 +12,63 @@ namespace WebApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UsersController : ControllerBase
+    public class BorrowingsController : ControllerBase
     {
-        private readonly IUserRepository _repository;
+        private readonly IBorrowingRepository _repository;
         private readonly IMapper _mapper;
 
-        public UsersController(IMapper mapper)
+        public BorrowingsController(IMapper mapper)
         {
-            this._repository = new UserRepository();
+            this._repository = new BorrowingRepository();
             this._mapper = mapper;
         }
 
         [HttpGet]
         public IActionResult GetAll()
         {
-            var user = _mapper.Map<IList<User>>(_repository.GetAll());
-            return HttpMessageOk(user);
+            var borrowings = _mapper.Map<IList<Borrowing>>(_repository.GetAll());
+            return HttpMessageOk(borrowings);
         }
 
         [HttpGet("{id:int}")]
         public IActionResult GetById(int id)
         {
-            var user = _mapper.Map<User>(_repository.GetById(id));
-            return HttpMessageOk(user);
+            var borrowing = _mapper.Map<Borrowing>(_repository.GetById(id));
+            return HttpMessageOk(borrowing);
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] User item)
+        public IActionResult Post([FromBody] Borrowing item)
         {
             if (!ModelState.IsValid) return HttpMessageError("Dados incorretos");
 
-            var user = _mapper.Map<User>(item);
-            _repository.Save(user);
+            var borrowing = _mapper.Map<Borrowing>(item);
+            _repository.Save(borrowing);
 
-            return HttpMessageOk(_mapper.Map<User>(item));
+            return HttpMessageOk(_mapper.Map<Borrowing>(item));
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var user =  _repository.GetById(id);
+            var borrowing =  _repository.GetById(id);
 
-            if (user == null) 
+            if (borrowing == null) 
                 return NotFound();
             else 
                 _repository.Delete(id);
-                return HttpMessageOk("Usuário excluído com sucesso!");
+                return HttpMessageOk("Empréstimo excluído com sucesso!");
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] User item)
+        public IActionResult Put([FromBody] Borrowing item)
         {
             if (!ModelState.IsValid) return HttpMessageError("Dados incorretos");
 
-            var user = _mapper.Map<User>(item);
-            _repository.Update(user);
+            var borrowing = _mapper.Map<Borrowing>(item);
+            _repository.Update(borrowing);
 
-            return HttpMessageOk(_mapper.Map<User>(item));
+            return HttpMessageOk(_mapper.Map<Borrowing>(item));
         }
 
                 private IActionResult HttpMessageOk(dynamic data = null)

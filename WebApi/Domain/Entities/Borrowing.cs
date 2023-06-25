@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApi.Domain.Entities
+namespace WebApi.Domain
 {
     public class Borrowing
     {
@@ -11,5 +11,6 @@ namespace WebApi.Domain.Entities
         public int UserId { get; set; }
         public int BookId { get; set; }
         public string DateOfBorrowing { get; set; }
+        public string Status { get; set; }
     }
 }

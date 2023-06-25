@@ -11,8 +11,8 @@ using WebApi.Data;
 namespace library_as.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230617171301_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230625002242_updatingFirst")]
+    partial class updatingFirst
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,31 +20,27 @@ namespace library_as.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.7");
 
-            modelBuilder.Entity("AuthorBook", b =>
-                {
-                    b.Property<int>("AuthorsId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("BooksId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("AuthorsId", "BooksId");
-
-                    b.HasIndex("BooksId");
-
-                    b.ToTable("AuthorBook");
-                });
-
             modelBuilder.Entity("WebApi.Domain.Author", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Age")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("BookId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Cpf")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BookId");
 
                     b.ToTable("Authors");
                 });
@@ -58,20 +54,38 @@ namespace library_as.Migrations
                     b.Property<int>("Isbn")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("ReleaseDate")
+                    b.Property<string>("ReleaseDate")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("UserId")
+                    b.HasKey("Id");
+
+                    b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("WebApi.Domain.Borrowing", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("DateOfBorrowing")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Books");
+                    b.ToTable("Borrowings");
                 });
 
             modelBuilder.Entity("WebApi.Domain.User", b =>
@@ -79,6 +93,12 @@ namespace library_as.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<int>("Age")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Cpf")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
@@ -88,31 +108,16 @@ namespace library_as.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("AuthorBook", b =>
+            modelBuilder.Entity("WebApi.Domain.Author", b =>
                 {
-                    b.HasOne("WebApi.Domain.Author", null)
-                        .WithMany()
-                        .HasForeignKey("AuthorsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("WebApi.Domain.Book", null)
-                        .WithMany()
-                        .HasForeignKey("BooksId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Authors")
+                        .HasForeignKey("BookId");
                 });
 
             modelBuilder.Entity("WebApi.Domain.Book", b =>
                 {
-                    b.HasOne("WebApi.Domain.User", null)
-                        .WithMany("BorrowedBooks")
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("WebApi.Domain.User", b =>
-                {
-                    b.Navigation("BorrowedBooks");
+                    b.Navigation("Authors");
                 });
 #pragma warning restore 612, 618
         }

@@ -51,23 +51,38 @@ namespace library_as.Migrations
                     b.Property<int>("Isbn")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("ItsBorrowed")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("ReleaseDate")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("UserId")
+                    b.HasKey("Id");
+
+                    b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("WebApi.Domain.Borrowing", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("DateOfBorrowing")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Books");
+                    b.ToTable("Borrowings");
                 });
 
             modelBuilder.Entity("WebApi.Domain.User", b =>
@@ -99,19 +114,7 @@ namespace library_as.Migrations
 
             modelBuilder.Entity("WebApi.Domain.Book", b =>
                 {
-                    b.HasOne("WebApi.Domain.User", null)
-                        .WithMany("BorrowedBooks")
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("WebApi.Domain.Book", b =>
-                {
                     b.Navigation("Authors");
-                });
-
-            modelBuilder.Entity("WebApi.Domain.User", b =>
-                {
-                    b.Navigation("BorrowedBooks");
                 });
 #pragma warning restore 612, 618
         }

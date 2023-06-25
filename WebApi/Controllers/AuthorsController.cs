@@ -72,7 +72,7 @@ namespace WebApi.Controllers
 
             return HttpMessageOk(_mapper.Map<AuthorDTO>(author));
         }
-
+        
         private IActionResult HttpMessageOk(dynamic data = null)
         {
             if(data == null)
