@@ -6,3 +6,12 @@
 
 ## Descrição do projeto
 API RESTful utilizando ASP.NET Core Web API para um sistema de gerenciamento de biblioteca. A API fornece funcionalidades para manipular Livros, Autores e Usuários de uma biblioteca. Utiliza dos conceitos de Entity Framework, DTOs, View Models, repositórios e camada de domínio.
+
+# :hammer: Funcionalidades do projeto
+Como citado anteriormente, essa API fornece funcionalidades de manipulação das entidades presentes do projeto. Segue alguns exemplos abaixo:
+
+- `Requisição de livros`: retorna todos os livros cadastrados no banco de dados, devolvendo todas informações a respeito do livro.
+- 
+- `Funcionalidade 2`: descrição da funcionalidade 2
+- `Funcionalidade 2a`: descrição da funcionalidade 2a relacionada à funcionalidade 2
+- `Funcionalidade 3`: descrição da funcionalidade 3
