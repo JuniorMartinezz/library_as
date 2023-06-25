@@ -10,8 +10,15 @@ API RESTful utilizando ASP.NET Core Web API para um sistema de gerenciamento de 
 # :hammer: Funcionalidades do projeto
 Como citado anteriormente, essa API fornece funcionalidades de manipulação das entidades presentes do projeto. Segue alguns exemplos abaixo:
 
-- `Requisição de livros`: retorna todos os livros cadastrados no banco de dados, devolvendo todas informações a respeito do livro.
-- 
-- `Funcionalidade 2`: descrição da funcionalidade 2
-- `Funcionalidade 2a`: descrição da funcionalidade 2a relacionada à funcionalidade 2
-- `Funcionalidade 3`: descrição da funcionalidade 3
+- `Requisição de autores`: retorna todos os autores cadastrados no banco de dados, devolvendo todas informações a respeito do autor.
+![image](https://github.com/JuniorMartinezz/library_as/assets/70040865/960d9961-1995-47a0-8c4f-d26523458a9f)
+
+- `Adicionar autor`: permite adicionar um autor no banco de dados.
+![image](https://github.com/JuniorMartinezz/library_as/assets/70040865/7d0c7b37-99b3-49ba-ae85-a674df0c5957)
+
+- `Alterar autor`: permite alterar um autor do banco de dados.
+![image](https://github.com/JuniorMartinezz/library_as/assets/70040865/cbc1f9df-a1eb-426d-ac51-94bc5ec829f6)
+
+- `Deletar autor`: permite deletar um autor do banco de dados.
+![image](https://github.com/JuniorMartinezz/library_as/assets/70040865/839871b1-0d06-43ae-b412-a30c72af0d80)
+
